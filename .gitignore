@@ -2,6 +2,5 @@
 example/.grow
 example/dist
 example/build
-example/node_modules
-example/bower_components
+node_modules
 **.mo
