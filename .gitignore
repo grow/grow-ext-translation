@@ -4,4 +4,5 @@ example/dist
 example/extensions
 example/build
 node_modules
+**.pyc
 **.mo
