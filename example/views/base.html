@@ -28,7 +28,6 @@
     {% endfor %}
   </head>
   <body>
-    {% include "/partials/header/header.html" %}
     <div class="wrapper">
       {% block main %}
         {% if doc.partials %}
@@ -48,7 +47,6 @@
         {% endif %}
       {% endblock %}
     </div>
-    {% include "/partials/footer/footer.html" %}
 
     <script src="{{ g.static('/dist/js/global.min.js').url.path }}"></script>
     {% set compositeJsFiles = [doc.view|replace('.html', '')] %}
