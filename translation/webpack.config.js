@@ -19,12 +19,12 @@ module.exports = {
   mode: 'development',
   entry: entry,
   output: {
-    filename: '[name].min.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].min.css',
+      filename: '[name].css',
       path: path.resolve(__dirname, 'dist'),
     })
   ],
