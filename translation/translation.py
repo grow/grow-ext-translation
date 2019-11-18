@@ -22,6 +22,9 @@ class TranslationPodspecStaticDirHook(hooks.PodspecStaticDirHook):
         """Execute pre deploy validation."""
         previous_result = previous_result or []
 
+        if not self.extension.config.get('enabled', True):
+            return previous_result
+
         serve_at = '/_grow/ext/translation/'
         static_dist_dir = os.path.dirname(__file__)[len(self.pod.root):]
         static_dist_dir = '{}/'.format(os.path.join(static_dist_dir, 'dist'))
