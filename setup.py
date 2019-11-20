@@ -14,6 +14,6 @@ setup(
         'translation',
     ],
     package_data={
-        'translation': ['dist/*.js', 'dist/*.css']
+        'translation': ['dist/*.js', 'dist/*.css', 'macros/*.html']
     }
 )

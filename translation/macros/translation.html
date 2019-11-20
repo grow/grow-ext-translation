@@ -1,0 +1,17 @@
+{% macro translation_styles(extension_dir) -%}
+  {% set extension_dir = extension_dir or doc.pod.extensions_dir %}
+  <link href="{{ g.static('/' ~ extension_dir ~ '/translation/dist/styles.css').url.path }}" rel="stylesheet">
+{%- endmacro %}
+
+{% macro translation_scripts(extension_dir) -%}
+  {% set extension_dir = extension_dir or doc.pod.extensions_dir %}
+  <script async src="{{ g.static('/' ~ extension_dir ~ '/translation/dist/translation.js').url.path }}"></script>
+{%- endmacro %}
+
+{% macro tag(text, pending) -%}
+  <grow-translation data-original="{{text}}" {% if pending %}pending{% endif %}>{{ _(text) }}</grow-translation>
+{%- endmacro %}
+
+{% macro attr(attribute, text) -%}
+  {{ attribute }}="{{_(text)}}" data-translation-original="{{text}}"
+{%- endmacro %}

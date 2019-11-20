@@ -1,7 +1,9 @@
 {
   "name": "grow_ext_translation",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "lit-element": "^2.2.1"
+  },
   "browserslist": [
     "last 1 version",
     "last 2 iOS versions"
