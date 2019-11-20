@@ -1,17 +1,40 @@
+{% set config = namespace(is_enabled=True) %}
+
+{# Determine if the extension is enabled to change the output. #}
+{% for ext in podspec.fields.get('ext', []) %}
+  {% for ext_key in ext %}
+    {% if 'translation.TranslationExtension' in ext_key %}
+      {% set config.is_enabled = ext[ext_key].get('enabled', True) %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
 {% macro translation_styles(extension_dir) -%}
-  {% set extension_dir = extension_dir or doc.pod.extensions_dir %}
-  <link href="{{ g.static('/' ~ extension_dir ~ '/translation/dist/styles.css').url.path }}" rel="stylesheet">
+  {% if config.is_enabled %}
+    {% set extension_dir = extension_dir or doc.pod.extensions_dir %}
+    <link href="{{ g.static('/' ~ extension_dir ~ '/translation/dist/styles.css').url.path }}" rel="stylesheet">
+  {% endif %}
 {%- endmacro %}
 
 {% macro translation_scripts(extension_dir) -%}
-  {% set extension_dir = extension_dir or doc.pod.extensions_dir %}
-  <script async src="{{ g.static('/' ~ extension_dir ~ '/translation/dist/translation.js').url.path }}"></script>
+  {% if config.is_enabled %}
+    {% set extension_dir = extension_dir or doc.pod.extensions_dir %}
+    <script async src="{{ g.static('/' ~ extension_dir ~ '/translation/dist/translation.js').url.path }}"></script>
+  {% endif %}
 {%- endmacro %}
 
 {% macro tag(text, pending) -%}
-  <grow-translation data-original="{{text}}" {% if pending %}pending{% endif %}>{{ _(text) }}</grow-translation>
+  {% if config.is_enabled %}
+    <grow-translation data-original="{{text}}" {% if pending %}pending{% endif %}>{{ _(text) }}</grow-translation>
+  {% else %}
+    {{ _(text) }}
+  {% endif %}
 {%- endmacro %}
 
 {% macro attr(attribute, text) -%}
-  {{ attribute }}="{{_(text)}}" data-translation-original="{{text}}"
+  {% if config.is_enabled %}
+    {{ attribute }}="{{_(text)}}" data-translation-original="{{text}}"
+  {% else %}
+    {{ attribute }}="{{_(text)}}"
+  {% endif %}
 {%- endmacro %}
